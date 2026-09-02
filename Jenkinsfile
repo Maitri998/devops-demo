@@ -11,9 +11,13 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running tests'
                 echo 'Running automated tests'
-                sh 'python3 -m pytest'
+                sh '''
+                    python3 -m venv .venv
+                    .venv/bin/python -m pip install --upgrade pip
+                    .venv/bin/pip install pytest
+                    .venv/bin/python -m pytest
+                '''
             }
         }
 
