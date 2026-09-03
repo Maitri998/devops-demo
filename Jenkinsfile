@@ -27,6 +27,20 @@ pipeline {
                 sh 'tar -czf devops-demo.tar.gz app/'
             }
         }
+
+        stage('Docker Build') {
+            steps {
+                echo 'Building Docker image'
+                sh 'docker build -t devops-demo:1.0 .'
+            }
+        }
+
+        stage('Docker Run') {
+            steps {
+                echo 'Running Docker container'
+                sh 'docker run --rm devops-demo:1.0'
+            }
+        }
     }
 
     post {
